@@ -29,7 +29,8 @@ class ArticuloController extends Controller
             $articulos=DB::table('articulo as a')
             ->join('categoria as c', 'a.idcategoria', '=', 'c.idcategoria')
             ->select('a.idarticulo', 'a.nombre', 'a.codigo', 'a.stock', 'c.nombre as categoria', 'a.descripcion', 'a.imagen', 'a.estado')
-            ->where('a.nombre', 'LIKE', '%' .$query. '%')->where('condicion', '=', '1')
+            ->where('a.nombre', 'LIKE', '%' .$query. '%')
+            ->orwhere('a.codigo', 'LIKE', '%' .$query. '%')
             ->orderBy('a.idarticulo', 'desc')
             ->paginate(7);
 
