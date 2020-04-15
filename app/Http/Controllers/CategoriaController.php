@@ -80,7 +80,7 @@ class CategoriaController extends Controller
      */
     public function edit($id)
     {
-        return view("almacen.Categoria.edit", ["categoria"=>Categoria::findOrFail($id)]);
+        return view("almacen.categoria.edit", ["categoria"=>Categoria::findOrFail($id)]);
     }
 
     /**
