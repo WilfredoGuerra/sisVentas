@@ -98,17 +98,17 @@ class VentaController extends Controller
     public function show($id)
     {
         $venta=DB::table('venta as v')
-            ->join('persona as p', 'v.cliente', '=', 'p.idpersona')
+            ->join('persona as p', 'v.idcliente', '=', 'p.idpersona')
             ->join('detalle_venta as dv', 'v.idventa', '=', 'dv.idventa')
-            //->select('i.idingreso', 'i.fecha_hora', 'p.nombre', 'i.tipo_comprobante', 'i.serie_comprobante', 'i.num_comprobante', 'i.impuesto', 'i.estado', DB::raw('(di.cantidad*di.precio_compra) as total'))
-            ->select('v.idventa', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 'v.serie_comprobante', 'v.num_comprobante', 'v.impuesto', 'i.estado', 'v.total_venta')
+            
+            ->select('v.idventa', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 'v.serie_comprobante', 'v.num_comprobante', 'v.impuesto', 'v.estado', 'v.total_venta')
             ->where('v.idventa', '=',$id)
             ->first();
 
         $detalles=DB::table('detalle_venta as d')
         ->join('articulo as a', 'd.idarticulo', '=', 'a.idarticulo')
         ->select('a.nombre as articulo', 'd.cantidad', 'd.descuento', 'd.precio_venta')
-        ->where('d.idingreso', '=',$id)
+        ->where('d.iddetalle_venta', '=',$id)
         ->get();
 
         return view("ventas.venta.show", ["venta"=>$venta, "detalles"=>$detalles]);
