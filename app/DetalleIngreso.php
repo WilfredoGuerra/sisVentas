@@ -23,4 +23,6 @@ class DetalleIngreso extends Model
     protected $guarded = [
         
     ];
+
+    
 }
