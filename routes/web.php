@@ -31,8 +31,12 @@ Route::resource('compras/ingreso', 'IngresoController');
 
 Route::resource('ventas/venta', 'VentaController');
 
+Route::resource('seguridad/usuario', 'UsuarioController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/logout', 'Auth\LoginController@logout'); 
+
+Route::get('/{slug?}', 'HomeController@index');
